@@ -43,14 +43,14 @@ const ReceiveMtnMomo = () => {
         method: 'POST', // or 'PUT'
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer sk_test_13a5d6840300b7d06060486282eefc9cbb8d9a34', // flutterwave api key
+          Authorization: 'Bearer sk_test_13a5d6840300b7d06060486282eefc9cbb8d9a34', 
         },
         body: JSON.stringify(data),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log('Success:', data);
-          alert('Transaction was Sucessful')
+          alert('Transaction was Successful')
           // setMomoUri(data.meta.authorization.redirect);
         })
         .catch((error) => {
