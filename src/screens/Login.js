@@ -32,7 +32,7 @@ const SigninScreen = ( {navigation}) => {
 
 
     function handleonSubmit(){
-        const auth= getAuth(app)
+        const auth= getAuth()
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
         // Signed in 
@@ -77,7 +77,7 @@ const SigninScreen = ( {navigation}) => {
             
             <View>
                 <TouchableOpacity style={styles.button} onPress={handleonSubmit} >
-					<Text style={styles.buttonText}>Sign up</Text>
+					<Text style={styles.buttonText}>Login</Text>
 				</TouchableOpacity>
             </View>
 

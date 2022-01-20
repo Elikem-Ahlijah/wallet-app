@@ -6,13 +6,17 @@ const HomeScreen = ({navigation}) => {
     const handleWalletPage =()=>{
         navigation.navigate('Wallet')
     }
+
+    const handleTransactionsPage=()=>{
+        navigation.navigate('Transactions')
+    }
   
 
 
     return (
         <View style={styles.container}>
             <MomoCard name='Payments' handleClick={handleWalletPage}/>
-            <MomoCard name= 'Transactions'/>
+            <MomoCard name= 'Transactions' handleClick={handleTransactionsPage}/>
         </View>
     )
 }

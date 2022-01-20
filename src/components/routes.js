@@ -9,6 +9,7 @@ import MobileMoneyPage from '../screens/MobileMoneyPage';
 import SigninScreen from '../screens/Login';
 import SignupScreen from '../screens/SignUp';
 import HomeScreen from '../screens/HomeScreen';
+import TransactionsList from '../screens/TransactionsList';
 
 
 
@@ -38,6 +39,7 @@ const Routes = () => {
         <Stack.Screen name='MTN Mobile Money' component={MtnMomoPage}></Stack.Screen>
         <Stack.Screen name='Receive MTN Payment' component={ReceiveMtnMomo}></Stack.Screen>
         <Stack.Screen name='Send MTN Momo' component={TransferMtnMomo}></Stack.Screen>
+        <Stack.Screen name='Transactions' component={TransactionsList}></Stack.Screen>
 </Stack.Navigator>
     )
 }

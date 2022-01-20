@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { Alert, View, Text, StyleSheet, TextInput } from 'react-native';
+import {getFirestore, collection, addDoc} from 'firebase/firestore';
 import  RNWeb from '../../RNWeb';
 
 const ReceiveMtnMomo = () => {
@@ -47,10 +48,13 @@ const ReceiveMtnMomo = () => {
         },
         body: JSON.stringify(data),
       })
-        .then((response) => response.json())
+        .then((response) => response.json()).then(response =>{
+          const db = getFirestore()  
+          addDoc( collection(db,"transactions"),{response})
+      })
         .then((data) => {
           console.log('Success:', data);
-          alert('Transaction was Successful')
+          Alert.alert('Transaction was Successful')
           // setMomoUri(data.meta.authorization.redirect);
         })
         .catch((error) => {
@@ -74,6 +78,8 @@ const ReceiveMtnMomo = () => {
         placeholder='Enter Number'
       />
       <Text style={styles.line}></Text>
+
+      
 
       {/* We display a webview for momo authorization if we have a valid url from
       the flutterwave api. Remember, we get a valid url from the response in
@@ -113,5 +119,18 @@ const styles = StyleSheet.create({
   height: 2,
   backgroundColor: 'purple',
       marginBottom: 40
+},
+button:{
+  width: '100%',
+height: 50,
+backgroundColor: 'purple',
+borderRadius: 10,
+justifyContent: 'center',
+alignItems: 'center',
+  marginVertical: 70
+},
+buttonText: {
+color: 'white',
+fontSize: 15,
 },
 })

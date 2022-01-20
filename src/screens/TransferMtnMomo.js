@@ -1,10 +1,14 @@
-import React from 'react'
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import React from 'react';
+import {Alert, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+
+import {getFirestore, collection, addDoc} from 'firebase/firestore';
 
 const TransferMtnMomo = () => {
 
 
    function handleOnChangeText (text){
+       
+       
         if(text.length === 10){
              let data = {
                 account_bank: 'MTN',
@@ -26,15 +30,19 @@ const TransferMtnMomo = () => {
         },
             body: JSON.stringify(data),
         })
-            .then((response) => response.json())
+            .then((response) => response.json()).then(response =>{
+                const db = getFirestore()  
+                addDoc( collection(db,"transactions"),{response})
+            })
             .then((response) => {
-            let myTimeOut = setTimeout( alert('Transaction has been Successful'), 3000 )   
-            console.log('Success:', response);
-            myTimeOut
-            clearTimeout(myTimeOut)
+                let myTimeOut = setTimeout(Alert.alert('Transaction has been Successful'), 3000 )   
+                console.log('Success:', response);
+                myTimeOut
+                clearTimeout(myTimeOut)
             
         
-              }).catch((error) => {
+              })
+              .catch((error) => {
                 console.error('Error:', error);
               });
         
@@ -56,10 +64,15 @@ const TransferMtnMomo = () => {
    }
     return (
         <View style={styles.container}>
-            <TextInput placeholder='Enter Number' style={styles.input} onChangeText={handleOnChangeText} 
+            <TextInput placeholder='Enter Number' style={styles.input}  onChangeText={handleOnChangeText} 
             
         />
         <Text style={styles.line}></Text>
+
+        {/* <TouchableOpacity style={styles.button}  >
+					<Text style={styles.buttonText}>Transfer</Text>
+		</TouchableOpacity> */}
+
         </View>
     )
 }
@@ -92,6 +105,19 @@ const styles = StyleSheet.create({
 		height: 2,
 		backgroundColor: 'purple',
         marginBottom: 40
+	},
+    button:{
+        width: '100%',
+		height: 50,
+		backgroundColor: 'purple',
+		borderRadius: 10,
+		justifyContent: 'center',
+		alignItems: 'center',
+        marginVertical: 70
+    },
+    buttonText: {
+		color: 'white',
+		fontSize: 15,
 	},
     
 })
